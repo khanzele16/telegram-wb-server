@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 app.post("/prodamus", async (req, res) => {
-  console.log(req.body)
+  console.log(req)
   // if (req.body[0].payment_status === "success") {
     // await fetch(
     //   `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
