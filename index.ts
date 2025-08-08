@@ -5,20 +5,13 @@ dotenv.config();
 
 const app = express();
 
-app.use((req, res, next) => {
-  if (req.headers["content-type"]?.includes("application/json")) {
-    express.json()(req, res, next);
-  }
-  else if (req.headers["content-type"]?.includes("application/x-www-form-urlencoded")) {
-    express.urlencoded({ extended: true })(req, res, next);
-  }
-  else {
-    next();
-  }
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //req.body.order_id
 app.post("/prodamus", async (req, res) => {
-  if (req.body[0].payment_status === "success") {
+    console.log(req.body)
+  if (req.body.payment_status === "success") {
     await fetch(
       `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
       {
