@@ -18,7 +18,8 @@ app.use((req, res, next) => {
 });
 
 app.post("/prodamus", async (req, res) => {
-  if (req.body.payment_status === "success") {
+  console.log(req)
+  // if (req.body[0].payment_status === "success") {
     // await fetch(
     //   `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
     //   {
@@ -41,8 +42,8 @@ app.post("/prodamus", async (req, res) => {
     //     }),
     //   }
     // );
-    console.log(`${process.env.BOT_TOKEN}`)
-  }
+  //   console.log(`${process.env.BOT_TOKEN}`)
+  // }
 
   res.sendStatus(200);
 });
