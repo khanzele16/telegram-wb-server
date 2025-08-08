@@ -23,7 +23,7 @@ app.post("/prodamus", async (req, res) => {
     //           [
     //             {
     //               text: "🚀 Вступить в канал",
-    //               url: "https://t.me/+W7NaYBxCsCA1OTAy",
+    //               url: `${process.env.CHANNEL_LINK}`,
     //             },
     //           ],
     //         ],
