@@ -16,7 +16,7 @@ app.use((req, res, next) => {
     next();
   }
 });
-
+//req.body.order_id
 app.post("/prodamus", async (req, res) => {
   if (req.body[0].payment_status === "success") {
     await fetch(
@@ -25,7 +25,7 @@ app.post("/prodamus", async (req, res) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chat_id: req.body.order_id,
+          chat_id: 6146035747,
           text: `✅ <b>Оплата получена!</b>\nКод заказа: <code>${req.body.order_id}</code>\n\nНажмите кнопку ниже, чтобы вступить в канал.`,
           parse_mode: "HTML",
           reply_markup: {
