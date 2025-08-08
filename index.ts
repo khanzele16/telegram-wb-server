@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.post("/prodamus", async (req, res) => {
-  const paymentData = req.body;
+  const paymentData = req;
 
   console.log("Пришло уведомление от Prodamus:", paymentData);
 
