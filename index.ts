@@ -55,7 +55,7 @@ app.post("/prodamus", async (req, res) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           chat_id: order_num,
-          text: `✅ <b>Оплата получена!</b>\nКод заказа: <code>${order_num}</code>\n\nНажмите кнопку ниже, чтобы вступить в канал.`,
+          text: `✅ <b>Оплата получена!</b>\nКод заказа: <code>${order_num}</code>\n\n⏳ У вас есть 24 часа для вступления в канал, после чего ссылка станет недейтвительна.\n\nНажмите кнопку ниже, чтобы вступить в канал.`,
           parse_mode: "HTML",
           reply_markup: {
             inline_keyboard: [
