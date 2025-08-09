@@ -24,7 +24,7 @@ app.post("/prodamus", async (req, res) => {
         }),
       }
     ).then((response) => response.json());
-    console.log(response.body);
+    console.log(response);
     // await fetch(
     //   `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
     //   {
