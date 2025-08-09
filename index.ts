@@ -20,7 +20,6 @@ app.post("/prodamus", async (req, res) => {
         body: JSON.stringify({
           chat_id: process.env.CHANNEL_ID,
           member_limit: 1,
-          expire_date: Math.floor(Date.now() / 1000) + 86400, // 24 часа
         }),
       }
     ).then((response) => response.json());
