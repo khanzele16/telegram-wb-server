@@ -12,11 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post("/prodamus", async (req, res) => {
   try {
-    const { payment_status, order_id } = req.body;
-
-    console.log(req.body)
-
-    console.log("Поступил платеж", payment_status, order_id);
+    const { payment_status, order_num } = req.body;
 
     if (payment_status !== "success") {
       return res.sendStatus(200);
@@ -41,7 +37,7 @@ app.post("/prodamus", async (req, res) => {
     }
 
     await User.findOneAndUpdate(
-      { telegramId: order_id },
+      { telegramId: order_num },
       {
         $set: {
           subscription: true,
@@ -58,8 +54,8 @@ app.post("/prodamus", async (req, res) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chat_id: order_id,
-          text: `✅ <b>Оплата получена!</b>\nКод заказа: <code>${order_id}</code>\n\nНажмите кнопку ниже, чтобы вступить в канал.`,
+          chat_id: order_num,
+          text: `✅ <b>Оплата получена!</b>\nКод заказа: <code>${order_num}</code>\n\nНажмите кнопку ниже, чтобы вступить в канал.`,
           parse_mode: "HTML",
           reply_markup: {
             inline_keyboard: [
