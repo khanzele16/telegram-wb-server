@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import User from "./server/models/User";
 
 dotenv.config();
 
@@ -23,29 +24,38 @@ app.post("/prodamus", async (req, res) => {
         }),
       }
     ).then((response) => response.json());
-    console.log(response);
-    // await fetch(
-    //   `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
-    //   {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       chat_id: 6146035747,
-    //       text: `✅ <b>Оплата получена!</b>\nКод заказа: <code>${req.body.order_id}</code>\n\nНажмите кнопку ниже, чтобы вступить в канал.`,
-    //       parse_mode: "HTML",
-    //       reply_markup: {
-    //         inline_keyboard: [
-    //           [
-    //             {
-    //               text: "🚀 Вступить в канал",
-    //               url: `${process.env.CHANNEL_LINK}`,
-    //             },
-    //           ],
-    //         ],
-    //       },
-    //     }),
-    //   }
-    // );
+    await User.findOneAndUpdate(
+      { telegramId: req.body.order_id },
+      {
+        $set: {
+          subscription: true,
+          dateOfSubscription: new Date(),
+          activePromocode: null,
+        },
+      }
+    );
+    await fetch(
+      `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: req.body.order_id,
+          text: `✅ <b>Оплата получена!</b>\nКод заказа: <code>${req.body.order_id}</code>\n\nНажмите кнопку ниже, чтобы вступить в канал.`,
+          parse_mode: "HTML",
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "🚀 Вступить в канал",
+                  url: `${response.result.invite_link}`,
+                },
+              ],
+            ],
+          },
+        }),
+      }
+    );
   }
 
   res.sendStatus(200);
