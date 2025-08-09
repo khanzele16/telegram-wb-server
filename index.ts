@@ -23,8 +23,8 @@ app.post("/prodamus", async (req, res) => {
           expire_date: Math.floor(Date.now() / 1000) + 86400, // 24 часа
         }),
       }
-    );
-    console.log(response);
+    ).then((response) => response.json());
+    console.log(response.body);
     // await fetch(
     //   `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
     //   {
