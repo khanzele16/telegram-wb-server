@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //req.body.order_id
 app.post("/prodamus", async (req, res) => {
+  console.log("Поступил платеж");
   if (req.body.payment_status === "success") {
     const response = await fetch(
       `https://api.telegram.org/bot${process.env.BOT_TOKEN}/createChatInviteLink`,
