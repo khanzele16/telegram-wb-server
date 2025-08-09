@@ -14,6 +14,8 @@ app.post("/prodamus", async (req, res) => {
   try {
     const { payment_status, order_id } = req.body;
 
+    console.log(req.body)
+
     console.log("Поступил платеж", payment_status, order_id);
 
     if (payment_status !== "success") {
