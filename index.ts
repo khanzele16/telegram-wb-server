@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -50,5 +51,7 @@ app.post("/prodamus", async (req, res) => {
 
   res.sendStatus(200);
 });
+
+mongoose.connect(process.env.MONGO_URL!);
 
 app.listen(3000, () => console.log("Webhook-сервер запущен"));
