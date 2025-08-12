@@ -14,6 +14,8 @@ app.post("/prodamus", async (req, res) => {
   try {
     const { payment_status, order_num } = req.body;
 
+    console.log("Продамус" + req.body)
+
     if (payment_status !== "success") {
       return res.sendStatus(200);
     }
